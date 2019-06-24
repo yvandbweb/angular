@@ -1,0 +1,141 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  position:relative;
+}
+
+.page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+.content-wrap {
+  padding-bottom: 50px;    /* Footer height */
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 45px;
+  padding-top:5px;
+  background: #0000c0;
+  text-align:center;
+  color:white;
+}
+.clear{
+    line-height:0;
+    clear:both;
+}
+
+.centered {
+   text-align: center;
+   font-size: 0;
+
+}
+.centered {
+   float: none;
+   display: inline-block;
+   text-align: left;
+   font-size: 13px;
+   width:70%;
+   height:100%;
+   margin-left:15%;
+   margin-right:15%;  
+   margin-bottom:30px;
+   padding-top:10px;
+}
+
+
+
+.row1{
+    background-color:#0000c0;
+    margin:0;padding:0;
+    text-align:center;
+    height:100px;
+}
+
+.row1 ul li{
+    color:white;
+    display: inline-block;
+    margin-right:30px;
+    
+}
+
+.row1 ul li a{
+    color:white;
+    text-decoration:none;
+    font-size:28px;
+}
+
+.row1 .react{
+    color:white;
+    text-decoration:none;
+    font-size:28px;
+}
+
+.container-fluid{
+    margin:0;padding:0;
+}
+
+.topsrchcolor{
+    background-color: #f2f1f0;
+    padding-bottom:15px;
+    padding-top:15px;
+    
+}
+.topsrchcolor form{
+    background-color: #f2f1f0;
+    float:left;
+    
+}
+.topsrchcolor .form-group{
+    float:left;
+    
+}
+.topsrchcolor button{
+    float:left;
+    margin-left:0;
+    
+}
+.topsrchcolor form{
+    float:left;
+    margin-left:0;margin-right:0;
+    width:50%;
+    
+    
+}
+.topsrchcolor input{
+    float:left;
+    width:80%;
+    
+}
+
+form.formspost1{
+    width:80px;
+}
+
+.but2{
+    padding:5px;
+    float:left;
+}
+
+.but3{
+    padding:5px;
+    float:left;
+    font-weight:bold;
+}
+.but4{
+    padding:5px;
+    float:left;
+    font-weight:normal;
+}
+.but7{
+    padding:5px;
+    float:right;
+}
+
+
+ul{
+    list-style-type: none;
+}
