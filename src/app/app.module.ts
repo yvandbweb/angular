@@ -12,14 +12,7 @@ import { UsersComponent } from './users/users.component';
 import { TopurlsComponent } from './topurls/topurls.component';
 import { BottomComponent } from './bottom/bottom.component';
 
-const appRoutes: Routes = [
-  { path: 'posts', component: PostsComponent },
-  { path: 'users',      component: UsersComponent },
-  { path: '',
-    redirectTo: '/posts',
-    pathMatch: 'full'
-  },  
-];
+
 
 
 @NgModule({
@@ -35,11 +28,7 @@ const appRoutes: Routes = [
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    NgxPaginationModule,
-        RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
-    )   
+    NgxPaginationModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

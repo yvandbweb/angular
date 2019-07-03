@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PostsandusersService {
     baseUrl:string = "https://ydbweb.com:8181/restdemo/";    
+    //baseUrl:string = "http://localhost:8080/";  
     baseUrlposts:string = "commentswithposts";
     
     baseUrlusers:string = "userandcomsandposts";

@@ -11,13 +11,11 @@ export class UsersComponent implements OnInit {
 
   p: Number = 1;
   count: Number = 5;  
-  items=[];  
+  items=[]; 
+  isLoading=true; 
 
   constructor(private puservice : PostsandusersService) { 
-     this.puservice.get_items_users().subscribe((res : any[])=>{
-                this.items = res;
-    }); 
-  
+    this.submitsrch(null);
   }
 
   ngOnInit() {
@@ -26,11 +24,15 @@ export class UsersComponent implements OnInit {
   }
   
   submitsrch(form) {
-        console.warn(form.value["srch"]);
+    let val="";
+    if (form!=null)
+        val=form.value["srch"];
 
-        this.puservice.get_items_users_with_search(form.value["srch"]).subscribe((res : any[])=>{
-                    this.items = res;
-        });    
+    this.puservice.get_items_users_with_search(val).subscribe((res : any[])=>{
+                this.items = res;
+                this.isLoading=false;
+    });    
+    
 
    }   
      

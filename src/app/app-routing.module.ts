@@ -4,10 +4,10 @@ import { PostsComponent } from './posts/posts.component';
 import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
-  { path: 'posts', component: PostsComponent },
+  { path: '', component: PostsComponent },
   { path: 'users', component: UsersComponent },
   { path: '',
-    redirectTo: '/posts',
+    redirectTo: '/',
     pathMatch: 'full'
   },  
 ];

@@ -1,29 +1,33 @@
+<div class="overlay" *ngIf='isLoading'><img src='assets/images/200.gif' alt="Logo" /></div>
+
 <div class="topsrchcolor">
-    <form #srchFormres="ngForm" (ngSubmit)="submitresetsrchres(srchFormres.form);" class="formspost formspost1">
-     <button type="button" type="submit" (click)="emptysearch('a')" class="btn btn-success">Reset</button>  
-    </form>
-    <form #srchForm="ngForm" (ngSubmit)="submitsrch(srchForm.form);" class="formspost">
-         <input type="text" class="form-control" id="tta" placeholder="Search Posts"name="srch" ngModel #nameField="ngModel" required minlength="1">           
-         <button type="button" type="submit" class="btn btn-success">Submit</button>   
+    <form #srchForm="ngForm" (ngSubmit)="submitsrch(srchForm.form);" class="form-inline">
+        <label>search posts</label>
+         <input type="text" class="form-check-input" id="tta" name="srch" ngModel #nameField="ngModel" required minlength="1">                    
+         <button type="submit" class="form-check-input btn btn-success">Submit</button> 
+         <button type="button" (click)="submitresetsrchres(srchForm.form);emptysearch('a')" class="form-check-input btn btn-success">Reset</button>
     </form>
     <div class="clear"></div>
 
 </div>
 <div class="clear"></div>
-
-<form #postForm="ngForm" (ngSubmit)="submitpost(postForm.form);" class="formspost">
-    <div class="form-group">
-      <label for="name">Add Post</label>
-      <textarea type="text" class="form-control" id="ttb" name="postadd" ngModel #nameField="ngModel" required minlength="1"></textarea>
-    </div>    
-   <button type="button" type="submit" (click)="emptysearch('b')" class="btn btn-success">Save post</button>    
-</form>
+<div class="row">
+    <div class="col-sm-6" *ngIf='!isLoading && items.length!=0'>
+        <form #postForm="ngForm" (ngSubmit)="submitpost(postForm.form);" class="formspost">
+            <div class="form-group">
+              <label for="name">Add Post</label>
+              <textarea type="text" class="form-control" id="ttb" name="postadd" ngModel #nameField="ngModel" required minlength="1"></textarea>
+            </div>    
+           <button type="button" type="submit" (click)="emptysearch('b')" class="btn btn-success">Save post</button>    
+        </form>
+    </div>
+</div>
 <div class="text-right">
   <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>
-<div *ngIf="items.length == 0; then thenBlock"></div>
-<ng-template #thenBlock>No results found</ng-template>
- <ul class="list-group">
+<div *ngIf='!isLoading && items.length==0'>no results</div>
+<ul class="list-group">
+ 
     <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let item of items  | paginate: { itemsPerPage: count, currentPage: p }; index as i">
     <div class="but3">
         <div class="but2"><button (click)="onShow(i)">show {{item.comments.length}} comments</button><button (click)="onHide(i)">Hide</button><button (click)="deletepost(item.id)">Delete</button></div>
@@ -32,8 +36,8 @@
         <div class="badge badge-primary badge-pill">Comments {{item.comments.length}}</div>
     </div>
     <div class="clear"></div>
-    <div class="but3">     
-        <div class="but3">{{item.user.nameuser}}</div><div class="but2"> Posted on </div><div class="but2">{{item.dateCreated}}</div>         
+    <div class="but3 deletepostcom">     
+        <div class="but3">{{item.user.nameuser}}</div><div class="but2"> Posted on </div><div class="but2">{{item.dateCreated| date : 'dd-MM-yyyy HH:mm:ss'}}</div>         
         <div class="clear"></div>
         <div class="but4">{{item.txt}}</div>
     </div>
@@ -45,7 +49,7 @@
                 <div class="but2"><button (click)="deletecomment(itemc.id,i,p)">Delete</button></div>                 
             </div>
             <div class="but3">  
-                <div class="but3">{{itemc.user.nameuser}}</div><div class="but2"> Commented on </div><div class="but2">{{itemc.dateCreated}}</div> 
+                <div class="but3">{{itemc.user.nameuser}}</div><div class="but2"> Commented on </div><div class="but2">{{itemc.dateCreated| date : 'dd-MM-yyyy HH:mm:ss'}}</div> 
                 <div class="clear"></div>
                 <div class="but4">{{itemc.text}}</div>
             </div>

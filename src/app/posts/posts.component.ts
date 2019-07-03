@@ -21,13 +21,13 @@ function create_UUID(){
 
 export class PostsComponent implements OnInit {
   p: Number = 1;
-  count: Number = 5;  
+  count: Number = 4;  
   items=[];  
+  isLoading=true;
 
   constructor(private puservice : PostsandusersService) { 
-     this.puservice.get_items().subscribe((res : any[])=>{
-               this.items= res;
-     });
+     this.submitsrch(null)
+     
   
   }
 
@@ -38,11 +38,14 @@ export class PostsComponent implements OnInit {
 
   
   submitsrch(form) {
-        console.warn(form.value["srch"]);
+    let val="";
+    if (form!=null)
+        val=form.value["srch"];
 
-        this.puservice.get_items_with_search(form.value["srch"]).subscribe((res : any[])=>{
-                    this.items = res;
-        });    
+    this.puservice.get_items_with_search(val).subscribe((res : any[])=>{
+                this.items = res;
+                this.isLoading=false;
+    });    
 
     }   
     

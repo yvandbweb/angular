@@ -1,20 +1,19 @@
+<div class="overlay" *ngIf='isLoading'><img src='assets/images/200.gif' alt="Logo" /></div>
 <div class="topsrchcolor">
-    <form #srchFormres="ngForm" (ngSubmit)="submitresetsrchres(srchFormres.form);" class="formspost formspost1">
-     <button type="button" type="submit" (click)="emptysearch('a')" class="btn btn-success">Reset</button>  
-</form>
-<form #srchForm="ngForm" (ngSubmit)="submitsrch(srchForm.form);" class="formspost">
-     <input type="text" class="form-control" id="tta" placeholder="Search Users"name="srch" ngModel #nameField="ngModel" required minlength="1">           
-     <button type="button" type="submit" class="btn btn-success">Submit</button>   
-</form>
+  <form #srchForm="ngForm" (ngSubmit)="submitsrch(srchForm.form);" class="form-inline">
+        <label>search users</label>
+         <input type="text" class="form-check-input" id="tta" name="srch" ngModel #nameField="ngModel" required minlength="1">                    
+         <button type="submit" class="form-check-input btn btn-success">Submit</button> 
+         <button type="button" (click)="submitresetsrchres(srchForm.form);emptysearch('a')" class="form-check-input btn btn-success">Reset</button>
+    </form>
 <div class="clear"></div>
 </div>
 <div class="clear"></div>
 
 <div class="text-right">
   <pagination-controls (pageChange)="p = $event"></pagination-controls>
-</div><div *ngIf="items.length == 0; then thenBlock"></div>
-<ng-template #thenBlock>No results found</ng-template>
-
+</div>
+<div *ngIf='!isLoading && items.length==0'>no results</div>
  <ul class="list-group">
 <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let item of items  | paginate: { itemsPerPage: count, currentPage: p }; index as i">
     <div class="but3">
@@ -25,7 +24,7 @@
     </div>
     <div class="clear"></div>
     <div class="but3">     
-        <div class="but3">{{item.nameuser}}</div><div class="but2"> Joined on </div><div class="but2">{{item.dateCreated}}</div>         
+        <div class="but3">{{item.nameuser}}</div><div class="but2"> Joined on </div><div class="but2">{{item.dateCreated| date : 'dd-MM-yyyy HH:mm:ss'}}</div>         
         <div class="clear"></div>
     </div>
     <div class="clear"></div>
@@ -33,7 +32,7 @@
     <ul  id="showhide{{i}}" style="display:none;">
         <li *ngFor="let itemc of item.comments">
             <div class="but3">  
-                <div class="but3">{{itemc.user.nameuser}}</div><div class="but2"> Commented on </div><div class="but2">{{itemc.dateCreated}}</div> 
+                <div class="but3">{{itemc.user.nameuser}}</div><div class="but2"> Commented on </div><div class="but2">{{itemc.dateCreated| date : 'dd-MM-yyyy HH:mm:ss'}}</div> 
                 <div class="clear"></div>
                 <div class="but4">{{itemc.text}}</div>
             </div>
@@ -43,7 +42,7 @@
     <ul  id="showhideusers{{i}}" style="display:none;">
         <li *ngFor="let itemc of item.posts">
             <div class="but3">  
-                <div class="but3">{{itemc.user.nameuser}}</div><div class="but2"> Posted on </div><div class="but2">{{itemc.dateCreated}}</div> 
+                <div class="but3">{{itemc.user.nameuser}}</div><div class="but2"> Posted on </div><div class="but2">{{itemc.dateCreated| date : 'dd-MM-yyyy HH:mm:ss'}}</div> 
                 <div class="clear"></div>
                 <div class="but4">{{itemc.txt}}</div>
             </div>
