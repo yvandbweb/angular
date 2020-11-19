@@ -22,6 +22,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/.htaccess",
               "src/robots.txt",
               "src/images/200.gif"
             ],

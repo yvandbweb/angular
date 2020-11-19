@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bottom.component.css']
 })
 export class BottomComponent implements OnInit {
+  yy: number = new Date().getFullYear();
 
   constructor() { }
 

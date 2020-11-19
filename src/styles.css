@@ -74,6 +74,12 @@ footer {
     font-size:28px;
 }
 
+.row {
+    margin-right: 0 ! important;
+    margin-left: 0 ! important;
+    color:black;
+}
+
 .container-fluid{
     margin:0;padding:0;
 }
