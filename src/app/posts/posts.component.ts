@@ -21,22 +21,22 @@ function create_UUID(){
 
 export class PostsComponent implements OnInit {
   p: Number = 1;
-  count: Number = 4;  
-  items=[];  
+  count: Number = 4;
+  items=[];
   isLoading=true;
 
-  constructor(private puservice : PostsandusersService) { 
+  constructor(private puservice : PostsandusersService) {
      this.submitsrch(null)
-     
-  
+
+
   }
 
   ngOnInit() {
   console.log(this.items);
-    
+
   }
 
-  
+
   submitsrch(form) {
     let val="";
     if (form!=null)
@@ -45,13 +45,14 @@ export class PostsComponent implements OnInit {
     this.puservice.get_items_with_search(val).subscribe((res : any[])=>{
                 this.items = res;
                 this.isLoading=false;
-    });    
+                console.log(this.items);
+    });
 
-    }   
-    
+    }
+
   submitpost(form) {
-        if (form.value["postadd"].trim()!==""){       
-         var utc = new Date().toJSON(); 
+        if (form.value["postadd"].trim()!==""){
+         var utc = new Date().toJSON();
 
          var user = {id: create_UUID(), nameuser: "anonymous", dateCreated: utc}
 
@@ -65,23 +66,23 @@ export class PostsComponent implements OnInit {
 
          this.items.unshift(objpost);
 
-        }  
-        form.reset(); 
+        }
+        form.reset();
          event.preventDefault();
 
-    }    
-    
-    
+    }
+
+
   submitcomment(form,index,p) {
-  
+
         let indexOfLastTodo = Number(p) * Number(this.count);
         let indexOfFirstTodo = Number(indexOfLastTodo) - Number(this.count);
-  
+
         index=index+indexOfFirstTodo;
         console.log(index);
-        if (form.value["commentadd"].trim()!=""){       
-         var utc = new Date().toJSON(); 
-         
+        if (form.value["commentadd"].trim()!=""){
+         var utc = new Date().toJSON();
+
 
          var user = {id: create_UUID(), nameuser: "anonymous", dateCreated: utc}
 
@@ -91,72 +92,72 @@ export class PostsComponent implements OnInit {
              user:user,
              dateCreated:utc
          }
-         
+
 
          this.items[index].comments.push(objpost);
-         
-         form.reset(); 
 
-        } 
+         form.reset();
 
-    }    
-    
+        }
+
+    }
+
   deletepost(id){
     let commen1=Object.assign([],this.items);
-        
+
     let myArray = commen1.filter(function( common ) {
         return common.id !== id;
     });
-    
+
     commen1=myArray;
     this.items=commen1;
-    
 
-    
-  }    
-  
+
+
+  }
+
   deletecomment(id,index,p){
-  
+
     let indexOfLastTodo = Number(p) * Number(this.count);
     let indexOfFirstTodo = Number(indexOfLastTodo) - Number(this.count);
 
-    index=index+indexOfFirstTodo;  
+    index=index+indexOfFirstTodo;
     let commen=Object.assign([],this.items[index].comments);
     let commen1=Object.assign([],this.items);
-        
+
     let myArray = commen.filter(function( common ) {
         return common.id !== id;
     });
-    
-    commen1[index].comments=myArray;
-    
-    this.items=commen1;
-    
 
-    
-  }                              
-    
-    
+    commen1[index].comments=myArray;
+
+    this.items=commen1;
+
+
+
+  }
+
+
    onShow(i){
       document.getElementById("showhide"+i).style.display="block";
-   }    
+   }
 
    onHide(i){
       document.getElementById("showhide"+i).style.display="none";
-   }   
-   
+   }
+
   emptysearch(i){
     (<HTMLInputElement>document.getElementById('tt'+i)).value=''
-  }   
-  
+  }
+
   submitresetsrchres(form) {
 
         this.puservice.get_items_with_search("%%").subscribe((res : any[])=>{
                     this.items = res;
-        });   
-        
-         form.reset(); 
+        });
 
-    }         
+         form.reset();
+
+    }
 
 }
